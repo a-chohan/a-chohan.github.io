@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ahad Chohan &amp; Systems Portfolio</title>
+  <!-- Fonts: Bricolage Grotesque (headings) + Public Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Apply saved theme before paint to avoid a flash -->
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <!-- Accessibility: lets keyboard users skip the navigation -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#home">Ahad Chohan</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button class="theme-btn" id="themeBtn" type="button" aria-pressed="false">Dark mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ HOME ============ -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div>
+          <h2 id="hero-title">I'm an aspiring software engineer interested in computer graphics and operating systems.</h1>
+          <p class="lede">
+
+          </p>
+          <p class="cta-row">
+            <a class="btn btn-primary" href="#projects">View my projects</a>
+            <a class="btn btn-secondary" href="assets/resume.pdf" download>Download resume (PDF)</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <h2 id="about-title">About me</h2>
+        <div class="about-grid">
+          <div class="prose">
+            <p>
+              I started in IT at Nassau Community College, where I earned an A.S. in Information
+              Technology in December 2024. I'm now finishing a B.S. in Computer Programming &amp;
+              Information Systems at Farmingdale State College (expected December 2027).
+            </p>
+          </div>
+
+          <div>
+            <h3>Education</h3>
+            <dl class="facts">
+              <dt>B.S. Computer Programming &amp; Information Systems</dt>
+              <dd>Farmingdale State College, expected Dec 2027</dd>
+              <dt>A.S. Information Technology</dt>
+              <dd>Nassau Community College, Dec 2024</dd>
+            </dl>
+            <h3>Coursework</h3>
+            <p class="tags">
+              <span>Computer Programming</span><span>Database Management</span>
+              <span>Information Security</span><span>Network Management</span>
+            </p>
+            <h3>Tools and technologies</h3>
+            <p class="tags">
+              <span>Java</span><span>C</span><span>Python</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section alt" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <h2 id="projects-title">Projects</h2>
+        <p class="section-intro">Below lists the projects I worked on. Select one to see what it does and what I practiced.</p>
+
+        <!-- js/main.js builds the tab buttons here. Without JavaScript, all four projects show as a plain list. -->
+        <div class="tablist" id="projectTabs" role="tablist" aria-label="Projects"></div>
+
+        <div class="projects" id="projectPanels">
+          <article class="project" data-title="3D Software Renderer" id="p-apache">
+            <h3>3D Software Renderer</h3>
+            <p>A very basic software based renderer written in Java.</p>
+            <ul>
+              <img src="assets/img1.png">
+            </ul>
+            <p class="tags"><span>Java</span></p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-grid">
+        <div>
+          <h2 id="contact-title">Contact</h2>
+          <p class="prose">
+            Send me a message and I'll reply as soon as I can.
+          </p>
+          <ul class="links">
+            <!-- TODO: replace each href with your real links -->
+            <li><a href="https://github.com/a-chohan">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/e6he5yu67/">LinkedIn</a></li>
+            <li><a href="mailto:choha2@farmingdale.edu" id="emailLink">choha2@farmingdale.edu</a>
+              <button type="button" class="copy-btn" id="copyEmail">Copy email</button></li>
+          </ul>
+        </div>
+
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+            <p class="error" id="name-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+            <p class="error" id="email-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <p class="error" id="message-error" hidden></p>
+          </div>
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <!-- Live region: screen readers announce the result -->
+          <p id="formStatus" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="year">2026</span> Ahad Chohan.</p>
+    </div>
+  </footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+/* ==========================================================
+   Portfolio stylesheet
+   1. Design tokens (colors, type, spacing)  2. Base
+   3. Layout & header  4. Hero  5. Sections  6. Projects
+   7. Contact form  8. Responsive  9. Accessibility helpers
+   ========================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  /* Light theme. Every text/background pair below passes WCAG AA (4.5:1). */
+  --bg: #f3f6f9;        /* page background: cool paper */
+  --surface: #ffffff;   /* cards and form fields */
+  --ink: #15202b;       /* main text */
+  --muted: #475563;     /* secondary text */
+  --accent: #0b6b6b;    /* links, buttons: deep teal */
+  --accent-ink: #ffffff;/* text on accent */
+  --line: #c9d3dc;      /* borders */
+  --alt: #e7edf3;       /* alternate section background */
+  --danger: #b42318;    /* errors */
+
+  --font-head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+
+  --radius: 6px;
+  --space: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+/* Dark theme: applied by the toggle (js/main.js sets data-theme) */
+:root[data-theme="dark"] {
+  --bg: #101820;
+  --surface: #17222d;
+  --ink: #e8eef3;
+  --muted: #a9b6c2;
+  --accent: #5cc8c8;
+  --accent-ink: #08201f;
+  --line: #2c3b49;
+  --alt: #141f29;
+  --danger: #ff8a80;
+}
+
+/* ---------- 2. Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;      /* 17px: comfortable reading size */
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0 0 .6em; }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.7rem, 3.5vw, 2.3rem); font-weight: 800; }
+h3 { font-size: 1.2rem; font-weight: 600; margin-top: 1.5rem; }
+
+p { margin: 0 0 1em; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* ---------- 3. Layout & header ---------- */
+.wrap { width: min(100% - 2*var(--space), 68rem); margin-inline: auto; }
+
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  width: min(100% - 2*var(--space), 68rem);
+  margin-inline: auto;
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 3.5rem; flex-wrap: wrap;
+}
+.brand { font-family: var(--font-head); font-weight: 800; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.25rem; align-items: center; }
+.nav-links a { color: var(--ink); text-decoration: none; padding: .4rem 0; border-bottom: 2px solid transparent; }
+.nav-links a:hover { border-color: var(--line); }
+/* Scroll-spy: JS adds aria-current to the section in view */
+.nav-links a[aria-current="true"] { border-color: var(--accent); font-weight: 600; }
+
+.nav-toggle { display: none; }  /* shown on small screens only */
+
+/* ---------- 4. Hero ---------- */
+.hero { padding-block: clamp(3rem, 9vw, 6.5rem); }
+.hero-grid { display: grid; gap: 3rem; grid-template-columns: 1.4fr 1fr; align-items: center; }
+.lede { font-size: 1.2rem; color: var(--muted); max-width: 38rem; }
+.cta-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+
+/* The one memorable element: a route diagram of the home lab.
+   Each step is joined by a line, like hops in a network path. */
+.path { margin: 0; padding: 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.path ol { list-style: none; margin: 0; padding: 0; position: relative; }
+.path li {
+  position: relative; padding: .55rem 0 .55rem 2rem; font-weight: 500;
+}
+.path li::before {            /* the dot (hop) */
+  content: ""; position: absolute; left: .25rem; top: 1.05rem;
+  width: .75rem; height: .75rem; border-radius: 50%;
+  background: var(--accent);
+}
+.path li:not(:last-child)::after {  /* the line to the next hop */
+  content: ""; position: absolute; left: .55rem; top: 1.7rem; bottom: -.6rem;
+  width: 2px; background: var(--line);
+}
+.path figcaption { margin: 1rem 0 0; font-size: .9rem; color: var(--muted); }
+
+/* Buttons */
+.btn {
+  display: inline-block; padding: .7rem 1.25rem; border-radius: var(--radius);
+  font: 600 1rem var(--font-body); text-decoration: none; cursor: pointer;
+  border: 2px solid var(--accent);
+  transition: background-color .15s, color .15s;
+}
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-secondary { background: transparent; color: var(--accent); }
+.btn-secondary:hover { background: var(--accent); color: var(--accent-ink); }
+
+/* ---------- 5. Sections ---------- */
+.section { padding-block: clamp(3rem, 7vw, 5rem); }
+.section.alt { background: var(--alt); }
+.section-intro { color: var(--muted); max-width: 40rem; }
+
+.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; }
+.prose { max-width: 38rem; }
+
+.facts { margin: 0; }
+.facts dt { font-weight: 600; }
+.facts dd { margin: 0 0 .9rem; color: var(--muted); }
+
+.tags { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: 0 0 1rem; }
+.tags span {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 999px; padding: .15rem .75rem; font-size: .92rem;
+}
+
+/* ---------- 6. Projects ---------- */
+.tablist { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem; }
+.tab {
+  font: 500 1rem var(--font-body); color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: .55rem 1rem; cursor: pointer;
+}
+.tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+.project {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: var(--space); margin-bottom: 1rem;
+}
+.project h3 { margin-top: 0; }
+.project[hidden] { display: none; }
+/* When JS is active only one project shows, so no stacked margin needed */
+.js .project { margin-bottom: 0; animation: reveal .25s ease-out; }
+@keyframes reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 7. Contact form ---------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; }
+.links { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.links li { margin-bottom: .6rem; }
+.copy-btn {
+  margin-left: .6rem; font: 500 .85rem var(--font-body); color: var(--accent);
+  background: none; border: 1px solid var(--accent); border-radius: var(--radius);
+  padding: .15rem .6rem; cursor: pointer;
+}
+
+.field { margin-bottom: 1.1rem; }
+label { display: block; font-weight: 600; margin-bottom: .3rem; }
+input, textarea {
+  width: 100%; padding: .65rem .75rem; font: inherit; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--muted); border-radius: var(--radius);
+}
+input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--danger); border-width: 2px; }
+.error { color: var(--danger); font-size: .92rem; margin: .3rem 0 0; }
+.status { margin-top: 1rem; font-weight: 500; }
+.status.ok { color: var(--accent); }
+
+.site-footer { border-top: 1px solid var(--line); padding-block: 1.5rem; color: var(--muted); font-size: .92rem; }
+.site-footer p { margin: 0; }
+
+.theme-btn {
+  font: 500 .9rem var(--font-body); color: var(--ink); background: transparent;
+  border: 1px solid var(--line); border-radius: var(--radius); padding: .3rem .7rem; cursor: pointer;
+}
+
+/* ---------- 8. Responsive (mobile-first fixes at narrow widths) ---------- */
+@media (max-width: 52rem) {
+  .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+  .nav-toggle {
+    display: inline-block; font: 600 1rem var(--font-body); color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: .4rem .9rem; cursor: pointer;
+  }
+  .nav-links {
+    display: none; width: 100%; flex-direction: column; align-items: flex-start;
+    gap: .25rem; padding: .5rem 0 1rem;
+  }
+  .nav-links.open { display: flex; }
+}
+
+/* ---------- 9. Accessibility helpers ---------- */
+/* Visible keyboard focus on every interactive element */
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute; left: .5rem; top: -4rem; z-index: 20;
+  background: var(--accent); color: var(--accent-ink); padding: .6rem 1rem; border-radius: var(--radius);
+}
+.skip-link:focus { top: .5rem; }
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
