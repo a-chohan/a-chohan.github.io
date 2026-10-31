@@ -1,6 +1,6 @@
 # Personal Portfolio: Web Design Document
 
-**Live site:** `https://a-chohan.github.io/a-chohan/`
+**Live site:** `https://a-chohan.github.io/`
 **Repository:** `https://github.com/a-chohan/a-chohan.github.io`
 
 ---
